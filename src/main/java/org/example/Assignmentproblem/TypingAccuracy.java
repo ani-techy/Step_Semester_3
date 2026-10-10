@@ -1,0 +1,43 @@
+package org.example.Assignmentproblem;
+
+
+public class TypingAccuracy {
+
+    static void checkTypingAccuracy(String original, String typed) {
+        int matched = 0;
+        int firstMismatch = -1;
+
+        int length = Math.min(original.length(), typed.length());
+
+        for (int i = 0; i < length; i++) {
+            if (original.charAt(i) == typed.charAt(i)) {
+                matched++;
+            } else if (firstMismatch == -1) {
+                firstMismatch = i;
+            }
+        }
+
+        double accuracy = (matched * 100.0) / original.length();
+
+        System.out.println("Matched: " + matched + "/" + original.length()
+                + " | Accuracy: " + String.format("%.2f", accuracy) + "%");
+
+        if (firstMismatch != -1) {
+            System.out.println("First Mismatch at position "
+                    + (firstMismatch + 1) + " ('"
+                    + original.charAt(firstMismatch) + "' vs '"
+                    + typed.charAt(firstMismatch) + "')");
+        } else if (original.length() == typed.length()) {
+            System.out.println("No Mismatches");
+        } else {
+            System.out.println("No mismatches in the common characters, "
+                    + "but the string lengths differ.");
+        }
+    }
+
+    public static void main(String[] args) {
+        checkTypingAccuracy("hello world", "hello worlt");
+        System.out.println();
+        checkTypingAccuracy("coding", "coding");
+    }
+}
